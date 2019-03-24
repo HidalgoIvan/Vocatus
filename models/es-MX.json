@@ -1,0 +1,136 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "vocatus",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "SaveName",
+                    "slots": [
+                        {
+                            "name": "Name",
+                            "type": "AMAZONFirstName"
+                        }
+                    ],
+                    "samples": [
+                        "registrar {Name}",
+                        "guardar {Name}",
+                        "añade a {Name}",
+                        "va a jugar {Name}",
+                        "registra el nombre {Name}",
+                        "guarda nombre {Name}"
+                    ]
+                },
+                {
+                    "name": "TellName",
+                    "slots": [],
+                    "samples": [
+                        "dime los nombres de los jugadores",
+                        "qué jugadores hay",
+                        "dame los nombres de los jugadores",
+                        "quienes están jugando",
+                        "enlista nombres",
+                        "dame nombres",
+                        "dime los nombres"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "AMAZONFirstName",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Abraham",
+                                "synonyms": [
+                                    "abogangster"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Manuel",
+                                "synonyms": [
+                                    "Manu"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Norberto",
+                                "synonyms": [
+                                    "Norbi"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Ivan",
+                                "synonyms": [
+                                    "Ivan"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "German"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Pablo"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "SaveName",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "Name",
+                            "type": "AMAZONFirstName",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1301972587875.1492738060756"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1301972587875.1492738060756",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Cómo se llama el jugador"
+                    }
+                ]
+            }
+        ]
+    }
+}
