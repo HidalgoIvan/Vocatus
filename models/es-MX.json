@@ -28,6 +28,15 @@
                         }
                     ],
                     "samples": [
+                        "también va a jugar {Name}",
+                        "nuevo jugador {Name}",
+                        "van a jugar {Name} y {Name}",
+                        "le entra {Name}",
+                        "los {Name} y el {Name}",
+                        "el {Name} y la {Name} ",
+                        "{Name}  {Name} y {Name} ",
+                        "{Name} y {Name}",
+                        "{Name}",
                         "registrar {Name}",
                         "guardar {Name}",
                         "añade a {Name}",
@@ -40,6 +49,13 @@
                     "name": "TellName",
                     "slots": [],
                     "samples": [
+                        "quienes juegan",
+                        "dime los jugadores que tenemos",
+                        "enlista los jugadores presentes",
+                        "haz un listado de las personas a jugar",
+                        "enlista los jugadores",
+                        "dime los jugadores",
+                        "quiénes estamos jugando",
                         "dime los nombres de los jugadores",
                         "qué jugadores hay",
                         "dame los nombres de los jugadores",
@@ -48,12 +64,233 @@
                         "dame nombres",
                         "dime los nombres"
                     ]
+                },
+                {
+                    "name": "GetQuestion",
+                    "slots": [],
+                    "samples": [
+                        "dame la pregunta siguiente",
+                        "quien sigue",
+                        "siguiente",
+                        "proxima pregunta",
+                        "la que sigue",
+                        "siguiente pregunta",
+                        "a ver dame una pregunta",
+                        "suelta una pregunta",
+                        "trivia pregunta",
+                        "hazme una pregunta",
+                        "pregúntame algo",
+                        "Dame una pregunta"
+                    ]
+                },
+                {
+                    "name": "HandleGuess",
+                    "slots": [
+                        {
+                            "name": "Answer",
+                            "type": "Answer"
+                        }
+                    ],
+                    "samples": [
+                        "sera el {Answer}",
+                        "yo digo que el {Answer}",
+                        "{Answer} es la respuesta correcta",
+                        "no se el {Answer} ",
+                        "la respuesta es {Answer}",
+                        "es el {Answer}",
+                        "{Answer}"
+                    ]
+                },
+                {
+                    "name": "StartTrivia",
+                    "slots": [],
+                    "samples": [
+                        "que comience el juego",
+                        "ya empieza el jeugo",
+                        "empieza el juego",
+                        "inicia el juego",
+                        "dale a las preguntas",
+                        "empecemos preguntas",
+                        "dale trivia",
+                        "juguemos trivia",
+                        "inicia las trivias",
+                        "empieza la ronda de trivia",
+                        "inicia el modo de juego trivia",
+                        "que empiece la trivia",
+                        "Inicia las preguntas",
+                        "que empiecen las preguntas",
+                        "inicia el juego de trivia",
+                        "dale a la trivia"
+                    ]
+                },
+                {
+                    "name": "RemoveName",
+                    "slots": [
+                        {
+                            "name": "Name",
+                            "type": "AMAZONFirstName"
+                        }
+                    ],
+                    "samples": [
+                        "ya llegaron por {Name}",
+                        "{Name} se salió del juego",
+                        "{Name} ya no está",
+                        "{Name} ya se fue",
+                        "{Name} ya no va a jugar",
+                        "saca del juego a {Name}",
+                        "borra a {Name} del juego",
+                        "saca a {Name}",
+                        "quita a {Name}",
+                        "elimina a {Name}"
+                    ]
                 }
             ],
             "types": [
                 {
                     "name": "AMAZONFirstName",
                     "values": [
+                        {
+                            "name": {
+                                "value": "isaac"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "david",
+                                "synonyms": [
+                                    "davichón",
+                                    "divochon",
+                                    "davichó",
+                                    "deivid"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "eduardo",
+                                "synonyms": [
+                                    "eduard",
+                                    "eddy"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "victor",
+                                "synonyms": [
+                                    "víctor"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "antonio",
+                                "synonyms": [
+                                    "toñito",
+                                    "toni",
+                                    "antony",
+                                    "toño",
+                                    "tony"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "jorge",
+                                "synonyms": [
+                                    "jorige el mamado"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bruno",
+                                "synonyms": [
+                                    "brunario",
+                                    "brunote",
+                                    "brunito"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ángel",
+                                "synonyms": [
+                                    "anjel",
+                                    "angelito",
+                                    "angel"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "martín",
+                                "synonyms": [
+                                    "mart",
+                                    "martspace",
+                                    "marts",
+                                    "martin",
+                                    "martn"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "rafaél",
+                                "synonyms": [
+                                    "rafagar",
+                                    "rafiki",
+                                    "rafita",
+                                    "rafael",
+                                    "rafa"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "peña",
+                                "synonyms": [
+                                    "peñafiel"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "alejandro",
+                                "synonyms": [
+                                    "alex",
+                                    "ale"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ana",
+                                "synonyms": [
+                                    "ana karen",
+                                    "ana k",
+                                    "ana la iguana",
+                                    "anita la huerfanita",
+                                    "anita"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "yoali"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Dafne",
+                                "synonyms": [
+                                    "dafodil",
+                                    "daphodil",
+                                    "dafni",
+                                    "daphne"
+                                ]
+                            }
+                        },
                         {
                             "name": {
                                 "value": "Abraham",
@@ -94,6 +331,384 @@
                         {
                             "name": {
                                 "value": "Pablo"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Answer",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Bravo",
+                                "synonyms": [
+                                    "rio bravo"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Eúfrates",
+                                "synonyms": [
+                                    "rio eufrates",
+                                    "eufrates"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Nilo",
+                                "synonyms": [
+                                    "rio nilo"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Amazonas",
+                                "synonyms": [
+                                    "rio amazonas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Roma",
+                                "synonyms": [
+                                    "En Roma"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Grecia",
+                                "synonyms": [
+                                    "En Grecia"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Turquía",
+                                "synonyms": [
+                                    "En Turquía"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Rusia",
+                                "synonyms": [
+                                    "En Rusia"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "203",
+                                "synonyms": [
+                                    "203 huesos"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "207",
+                                "synonyms": [
+                                    "207 huesos"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "206",
+                                "synonyms": [
+                                    "206 huesos"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "204",
+                                "synonyms": [
+                                    "204 huesos"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Elvis Presley",
+                                "synonyms": [
+                                    "Elvis Presley"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Michael Jackson",
+                                "synonyms": [
+                                    "Michael Jackson"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Freddie Mercury",
+                                "synonyms": [
+                                    "Freddie Mercury"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "George Michael",
+                                "synonyms": [
+                                    "George Michael"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1945",
+                                "synonyms": [
+                                    "En el año 1945",
+                                    "En 1945",
+                                    "en 1945",
+                                    "en el año de 1945"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1933",
+                                "synonyms": [
+                                    "En el año 1933",
+                                    "En 1933",
+                                    "en 1933",
+                                    "en el año de 1933"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1938",
+                                "synonyms": [
+                                    "En el año 1938",
+                                    "En 1938",
+                                    "en 1938",
+                                    "en el año de 1938"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1939",
+                                "synonyms": [
+                                    "En el año 1939",
+                                    "En 1939",
+                                    "en 1939",
+                                    "en el año de 1939"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Oro",
+                                "synonyms": [
+                                    "El oro",
+                                    "oro",
+                                    "el oro"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Plata",
+                                "synonyms": [
+                                    "La Plata",
+                                    "plata",
+                                    "la plata"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Rodio",
+                                "synonyms": [
+                                    "El Rodio",
+                                    "rodio",
+                                    "el rodio"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Estaño",
+                                "synonyms": [
+                                    "El Estaño",
+                                    "estaño",
+                                    "el estaño"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1914",
+                                "synonyms": [
+                                    "En el año 1914",
+                                    "En 1914",
+                                    "en 1914",
+                                    "en el año de 1914"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1919",
+                                "synonyms": [
+                                    "En el año 1919",
+                                    "En 1919",
+                                    "en 1919",
+                                    "en el año de 1919"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1921",
+                                "synonyms": [
+                                    "En el año 1921",
+                                    "En 1921",
+                                    "en 1921",
+                                    "en el año de 1921"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1915",
+                                "synonyms": [
+                                    "En el año 1915",
+                                    "En 1915",
+                                    "en 1915",
+                                    "en el año de 1915"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Español",
+                                "synonyms": [
+                                    "El Español",
+                                    "español",
+                                    "el español"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Inglés",
+                                "synonyms": [
+                                    "El Inglés ",
+                                    "inglés",
+                                    "el inglés"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Mandarín",
+                                "synonyms": [
+                                    "El Mandarín",
+                                    "mandarín",
+                                    "el mandarín"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Alemán",
+                                "synonyms": [
+                                    "El Alemán",
+                                    "alemán",
+                                    "el alemán"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Océano Atlántico",
+                                "synonyms": [
+                                    "El Océano Atlántico",
+                                    "océano atlántico",
+                                    "el océano atlántico"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Océano Pacífico",
+                                "synonyms": [
+                                    "El Océano Pacífico",
+                                    "océano pacífico",
+                                    "el océano pacífico"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Océano Índico",
+                                "synonyms": [
+                                    "El Océano Índico",
+                                    "océano índico",
+                                    "el océano índico"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Océano Ártico",
+                                "synonyms": [
+                                    "El Océano Ártico",
+                                    "océano ártico",
+                                    "el océano ártico"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "4",
+                                "synonyms": [
+                                    "4 patas",
+                                    "cuatro patas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "6",
+                                "synonyms": [
+                                    "6 patas",
+                                    "seis patas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "8",
+                                "synonyms": [
+                                    "8 patas",
+                                    "ocho patas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "10",
+                                "synonyms": [
+                                    "10 patas",
+                                    "diez patas"
+                                ]
                             }
                         }
                     ]
