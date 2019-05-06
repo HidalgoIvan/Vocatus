@@ -215,19 +215,17 @@ const AddPointIntentHandler = {
         } else {
           allNames = data.map(e => e.playerName).join(", ");
         }
-        let playerName = request.intent.slots.player.value;
-        console.log("allnames: " + allNames);
-        console.log("playername: " + playerName);
+        let playerName = request.intent.slots.player.value
         if(allNames.toLowerCase().includes(playerName.toLowerCase()))
         {
           const { requestEnvelope, attributesManager } = handlerInput;
           const sessionAttributes = attributesManager.getSessionAttributes();
           var playerScores = sessionAttributes['score'];
-          playerScores[playername] = playerScores[playername] + 1;
+          playerScores[playerName] = playerScores[playerName] + 1;
           Object.assign(sessionAttributes, {
               score : playerScores
           });
-          speechText = "Punto para " + playerName + " ahora lleva " + setSessionAttributes['score'][playername] + " puntos";
+          speechText = "Punto para " + playerName + " ahora lleva " + sessionAttributes['score'][playerName] + " puntos";
         }else{
           var response = responseBuilder
           .speak("No tengo registrado a ningún " + playerName)
