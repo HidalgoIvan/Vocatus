@@ -107,8 +107,14 @@ const StartTriviaIntentHandler = {
     const {responseBuilder } = handlerInput;
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var names = await getAllNames(handlerInput, userID);
-    var speechText = "Prepárense " + names + " para un juego en el que se les harán varias\
-    preguntas y ustedes deberán contestar tan bien como puedan para evitar salir en coma etílico";
+    var speechText =""
+    if(names != null){
+      speechText = "Prepárense " + names + " para un juego en el que se les harán varias\
+      preguntas y ustedes deberán contestar tan bien como puedan para evitar salir en coma etílico";
+    }else{
+      var speechText = "No tienes jugadores registrados. ";
+      speechText += "Dime a quiénenes agrego.";
+    }
     var response = responseBuilder
       .speak(speechText)
       .getResponse();
