@@ -5,6 +5,7 @@ const Alexa = require('ask-sdk');
 const dbHelper = require('./helpers/dbHelper');
 const GENERAL_REPROMPT = "What would you like to do?";
 const dynamoDBTableName = "vocatus-names";
+const dynamoDBSongTable = "vocatus-songs";
 var playerScore = {};
 async function getRandomQuestion(handlerInput)
 {
@@ -19,6 +20,27 @@ async function getRandomQuestion(handlerInput)
         speechText += " " + data[0].options;
         Object.assign(sessionAttributes, {
         correctAnswer: data[0].correctAnswer
+      });
+        return speechText;
+    }
+  )
+}
+async function getRandomSongQuestion(handlerInput)
+{
+  var speechText = ""
+  const { requestEnvelope, attributesManager } = handlerInput;
+  const sessionAttributes = attributesManager.getSessionAttributes();
+  var songId = Math.floor(Math.random() * 10) + 1;
+  return dbHelper.getSongQuestions(songId)
+      .then((data) => {
+        var question = data.map(e => e.text)
+        // speechText += data[0].text;
+        speechText += `Escucha la siguiente canción: <break time="1s"/> <audio src="${data[0].url}" />`;
+        speechText += `¿Cuál es el nombre de la canción?<break time="1s"/>${data[0].options}`
+        speechText += " " + data[0].options;
+        Object.assign(sessionAttributes, {
+        correctAnswer: data[0].correctAnswer,
+        jugadores: jugadores,
       });
         return speechText;
     }
@@ -258,15 +280,23 @@ const GetQuestionIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GetQuestion';
   },
   async handle(handlerInput) {
-    var choice = Math.floor(Math.random() * 3);
+    var choice = 1;
     const {responseBuilder } = handlerInput;
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var playerName = await getRandomName(handlerInput, userID);
-    if(choice == 0) //Pregunta de trivia
+    if(choice == 0 || choice == 1)
     {
       const { requestEnvelope, attributesManager } = handlerInput;
       const sessionAttributes = attributesManager.getSessionAttributes();
-      var questionText = await getRandomQuestion(handlerInput);
+      switch (choice) {
+        case 0:
+          var questionText = await getRandomQuestion(handlerInput);
+          break;
+        case 1:
+          var questionText = await getRandomSongQuestion(handlerInput);
+          break;
+
+      }
       var speechText = playerName + ", " + questionText;
       Object.assign(sessionAttributes, {
       currentPlayer: playerName
@@ -276,10 +306,6 @@ const GetQuestionIntentHandler = {
         .getResponse();
       response.shouldEndSession = false;
       return response;
-    }
-    if(choice == 1)
-    {
-      //Aquí van las canciones
     }
     else{
       var themes = ["acuarios","pintura","canotaje","música clasica","dietas","mascotas"];
