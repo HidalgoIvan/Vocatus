@@ -5,6 +5,7 @@ const Alexa = require('ask-sdk');
 const dbHelper = require('./helpers/dbHelper');
 const GENERAL_REPROMPT = "What would you like to do?";
 const dynamoDBTableName = "vocatus-names";
+var playerScore = {};
 async function getRandomQuestion(handlerInput)
 {
   var speechText = ""
@@ -17,12 +18,14 @@ async function getRandomQuestion(handlerInput)
         speechText += data[0].text;
         speechText += " " + data[0].options;
         Object.assign(sessionAttributes, {
-        correctAnswer: data[0].correctAnswer
+        correctAnswer: data[0].correctAnswer,
+        jugadores: jugadores,
       });
         return speechText;
     }
   )
 }
+
 async function getRandomName(handlerInput, userID)
 {
   var speechText = ""
@@ -52,10 +55,23 @@ const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
-  handle(handlerInput) {
-    const speechText = 'Hola, soy Vocatus tu skill específica para las pedar y poner el ambiente, dime los nombres de los jugadores y cuando estés listo para jugar di, inicia el juego';
+  async handle(handlerInput) {
+    const speechText = 'Hola, soy Vocatus, tu skill específica para las pedas y poner el ambiente, puedes empezar preguntándome ¿Cómo se juega?';
     const repromptText = 'Dime un nombre';
-
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
+    console.log(typeof getAllNames(handlerInput, userID));
+    var names =(await (getAllNames(handlerInput, userID)) + "").split(",");
+    var aux = "";
+    for(var x = 0; x < names.length; x++)
+    {
+      var name = names[x];
+      playerScore[""+name] = 0;
+    }
+    const { requestEnvelope, attributesManager } = handlerInput;
+    const sessionAttributes = attributesManager.getSessionAttributes();
+    Object.assign(sessionAttributes, {
+        score : playerScore
+    });
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(repromptText)
@@ -160,12 +176,12 @@ const HandleGuessIntentHandler = {
       if(guess.includes(correctAnswer.toLowerCase()))//Respuesta correcta
       {
 
-        speechText = `<speak>¿${guess}?, La respuesta es...<break time="1s"/>¡Correcta!<audio src="soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_03"/></speak>`;
+        speechText = `<speak>¿${guess}?, La respuesta es...<break time="1s"/><audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>¡Correcta!<audio src="soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_03"/></speak>`;
       }else{
         var seconds = Math.floor(Math.random()*15) + 2;
         var alcohols = ["cerveza","vodka","tequila","una cubita", "nesquick por la nariz", "tonayan", "besar al de al lado", "darle de tomar al de al lado", "fourloko", "kosaco", "aguas locas", "la bebida del de al lado", "el vaso más lleno", "alcohol con mayor grado","lamerle el pie al más chaparro", "quitarte la playera","gemir","yakult"];
         var drink = alcohols[Math.floor(Math.random()*alcohols.length)];
-        speechText = `<speak>¿${guess}?, La respuesta es...<break time="1s"/>¡Incorrecta!<audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_boo_03'/>${seconds} segundos de ${drink}</speak>`;
+        speechText = `<speak>¿${guess}?, La respuesta es...<break time="1s"/><audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_negative_response_01'/>¡Incorrecta!<audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_boo_03'/>${seconds} segundos de ${drink}</speak>`;
       }
     }
     catch(err)
@@ -179,24 +195,90 @@ const HandleGuessIntentHandler = {
         return response;
     }
 }
+const AddPointIntentHandler = {
+
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'AddPoint';
+  },
+  async handle(handlerInput) {
+    const { responseBuilder } = handlerInput;
+    var speechText = "";
+    const { requestEnvelope, attributesManager } = handlerInput;
+    const userID = handlerInput.requestEnvelope.context.System.user.userId; 
+    var allNames = "";
+    const request = handlerInput.requestEnvelope.request;
+    return dbHelper.getNames(userID)
+      .then((data) => {
+        if (data.length == 0) {
+          speechText = "Aún no has guardado a ningún jugador"
+        } else {
+          allNames = data.map(e => e.playerName).join(", ");
+        }
+        let playerName = request.intent.slots.player.value;
+        console.log("allnames: " + allNames);
+        console.log("playername: " + playerName);
+        if(allNames.toLowerCase().includes(playerName.toLowerCase()))
+        {
+          
+          speechText = "Punto para " + playerName;
+        }else{
+          var response = responseBuilder
+          .speak("No tengo registrado a ningún " + playerName)
+          .getResponse();
+          response.shouldEndSession = false;
+          return response;
+        }
+        var response = responseBuilder
+          .speak(speechText)
+          .getResponse();
+        response.shouldEndSession = false;
+        return response;
+      })
+      .catch((err) => {
+        speechText = "Error al acceder a los nombres en la base de datos"
+        return responseBuilder
+          .speak(speechText)
+          .getResponse();
+      })
+    }
+}
 const GetQuestionIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'GetQuestion';
   },
   async handle(handlerInput) {
+    var choice = Math.floor(Math.random() * 2); 
     const {responseBuilder } = handlerInput;
-    const userID = handlerInput.requestEnvelope.context.System.user.userId; 
-    const { requestEnvelope, attributesManager } = handlerInput;
-    const sessionAttributes = attributesManager.getSessionAttributes();
-    var questionText = await getRandomQuestion(handlerInput);
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var playerName = await getRandomName(handlerInput, userID);
-    var speechText = playerName + ", " + questionText;
-    var response = responseBuilder
-      .speak(speechText)
-      .getResponse();
-    response.shouldEndSession = false;
-    return response;
+    if(1 == 0)
+    {
+      const { requestEnvelope, attributesManager } = handlerInput;
+      const sessionAttributes = attributesManager.getSessionAttributes();
+      var questionText = await getRandomQuestion(handlerInput);
+      var speechText = playerName + ", " + questionText;
+      var response = responseBuilder
+        .speak(speechText)
+        .getResponse();
+      response.shouldEndSession = false;
+      return response;
+    }
+    else{
+      var themes = ["acuarios","pintura","canotaje","música clasica","dietas","mascotas"];
+      var speechText = "<speak>" + playerName + ", tienes 5 segundos para decir 5 cosas relacionadas con el tema de " + themes[Math.floor(Math.random()*themes.length)] + " empezando ahora ";
+      for(var x = 1; x <= 4; x++){
+        speechText+="<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/><break time='1s'/>";
+      }
+      speechText+="<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/>";
+      speechText += "¡Se acabó el tiempo!</speak>";
+      var response = responseBuilder
+        .speak(speechText)
+        .getResponse();
+      response.shouldEndSession = false;
+      return response;
+    }
   }
 }
 const RemoveNameIntentHandler = {
@@ -294,6 +376,7 @@ exports.handler = skillBuilder
     StartTriviaIntentHandler,
     HandleGuessIntentHandler,
     RemoveNameIntentHandler,
+    AddPointIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler

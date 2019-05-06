@@ -10,7 +10,7 @@
         },
         "interactionModel": {
           "es-MX": {
-            "eTag": "8087865fdb528566a6f3f63400e0ac61"
+            "eTag": "19305df2531669493b856a8584fe0545"
           }
         },
         "lambda": [
@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-vocatus-default",
             "handler": "index.handler",
-            "revisionId": "a039034d-064a-4ce3-9a2d-d3c72e3c0f2c",
+            "revisionId": "94f72807-38d5-447e-a6b5-e1dd94fa3af8",
             "runtime": "nodejs8.10"
           }
         ]

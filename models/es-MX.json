@@ -143,6 +143,24 @@
                         "quita a {Name}",
                         "elimina a {Name}"
                     ]
+                },
+                {
+                    "name": "AddPoint",
+                    "slots": [
+                        {
+                            "name": "player",
+                            "type": "AMAZONFirstName"
+                        }
+                    ],
+                    "samples": [
+                        "porfa suma un punto para {player}",
+                        "{player} se merece el punto",
+                        "dale un punto más a {player}",
+                        "uno más para {player}",
+                        "punto para {player}",
+                        "dale un punto a {player}",
+                        "súmale un punto a {player}"
+                    ]
                 }
             ],
             "types": [
