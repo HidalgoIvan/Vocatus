@@ -11,7 +11,7 @@ async function getRandomQuestion(handlerInput)
   var speechText = ""
   const { requestEnvelope, attributesManager } = handlerInput;
   const sessionAttributes = attributesManager.getSessionAttributes();
-  var questionId = Math.floor(Math.random() * 10) + 1; 
+  var questionId = Math.floor(Math.random() * 10) + 1;
   return dbHelper.getQuestions(questionId)
       .then((data) => {
         var question = data.map(e => e.text)
@@ -103,7 +103,7 @@ const SaveNameIntentHandler = {
   },
   async handle(handlerInput) {
     const {responseBuilder } = handlerInput;
-    const userID = handlerInput.requestEnvelope.context.System.user.userId; 
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
     const slots = handlerInput.requestEnvelope.request.intent.slots;
     const name = slots.Name.value;
     console.log("NAMES:" + slots.Name);
@@ -134,7 +134,7 @@ const TellNameIntentHandler = {
   },
   async handle(handlerInput) {
     const {responseBuilder } = handlerInput;
-    const userID = handlerInput.requestEnvelope.context.System.user.userId; 
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
     return dbHelper.getNames(userID)
       .then((data) => {
         var speechText = "Los nombres que has guardado son "
@@ -168,7 +168,7 @@ const HandleGuessIntentHandler = {
     var speechText = "";
     try{
     const { requestEnvelope, attributesManager } = handlerInput;
-    
+
     const request = handlerInput.requestEnvelope.request;
     let guess = request.intent.slots.Answer.value;
     const sessionAttributes = attributesManager.getSessionAttributes();
@@ -205,7 +205,7 @@ const AddPointIntentHandler = {
     const { responseBuilder } = handlerInput;
     var speechText = "";
     const { requestEnvelope, attributesManager } = handlerInput;
-    const userID = handlerInput.requestEnvelope.context.System.user.userId; 
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var allNames = "";
     const request = handlerInput.requestEnvelope.request;
     return dbHelper.getNames(userID)
@@ -220,8 +220,14 @@ const AddPointIntentHandler = {
         console.log("playername: " + playerName);
         if(allNames.toLowerCase().includes(playerName.toLowerCase()))
         {
-          
-          speechText = "Punto para " + playerName;
+          const { requestEnvelope, attributesManager } = handlerInput;
+          const sessionAttributes = attributesManager.getSessionAttributes();
+          var playerScores = sessionAttributes['score'];
+          playerScores[playername] = playerScores[playername] + 1;
+          Object.assign(sessionAttributes, {
+              score : playerScores
+          });
+          speechText = "Punto para " + playerName + " ahora lleva " + setSessionAttributes['score'][playername] + " puntos";
         }else{
           var response = responseBuilder
           .speak("No tengo registrado a ningún " + playerName)
@@ -236,6 +242,7 @@ const AddPointIntentHandler = {
         return response;
       })
       .catch((err) => {
+        console.log(err);
         speechText = "Error al acceder a los nombres en la base de datos"
         return responseBuilder
           .speak(speechText)
@@ -249,11 +256,11 @@ const GetQuestionIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GetQuestion';
   },
   async handle(handlerInput) {
-    var choice = Math.floor(Math.random() * 2); 
+    var choice = Math.floor(Math.random() * 3);
     const {responseBuilder } = handlerInput;
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var playerName = await getRandomName(handlerInput, userID);
-    if(1 == 0)
+    if(choice == 0)
     {
       const { requestEnvelope, attributesManager } = handlerInput;
       const sessionAttributes = attributesManager.getSessionAttributes();
@@ -264,6 +271,10 @@ const GetQuestionIntentHandler = {
         .getResponse();
       response.shouldEndSession = false;
       return response;
+    }
+    if(choice == 1)
+    {
+      //Aquí van las canciones
     }
     else{
       var themes = ["acuarios","pintura","canotaje","música clasica","dietas","mascotas"];
@@ -285,10 +296,10 @@ const RemoveNameIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'RemoveName';
-  }, 
+  },
   handle(handlerInput) {
     const {responseBuilder } = handlerInput;
-    const userID = handlerInput.requestEnvelope.context.System.user.userId; 
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
     const slots = handlerInput.requestEnvelope.request.intent.slots;
     const name = slots.Name.value;
     return dbHelper.removeName(name, userID)
