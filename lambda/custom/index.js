@@ -423,12 +423,12 @@ const InstruccionesIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'Instrucciones';
   },
   handle(handlerInput) {
-    var speechText = '<p>Di "empezar juego", para iniciar a jugar.</p><p>Di "siguiente pregunta", para pasar a la siguiente pregunta.</p>';
-    speechText += '<p>Di "agrega a Norbi" o "elimina a Norbi", para eliminar o agregar al jugador de nombre Norbi.</p>'
-    speechText += '<p>El juego consiste de 3 tipos de preguntas: de opción múltiple, adivina la canción y temas por tiempo.</p>'
-    speechText += '<p>Opcón múltiple: <break strength="strong"/> se te dirá una pregunta de opción múltiple y tendrás que contestar la respuesta correcta.</p>';
-    speechText += '<p>Adivina la canción: <break strength="strong"/> se reproducirá una cancióne y tendrás que contestar la respuesta correcta.</p>';
-    speechText += '<p>Tema por tiempo: <break strength="strong"/> se te dirá un tema y tendrás que decir la cantidad de palabras relacionadas que se te indique.</p>';
+    var speechText = '<p> Di "empezar juego", para iniciar a jugar.</p><p>Di "siguiente pregunta", para pasar a la siguiente pregunta.</p>';
+    speechText += '<p> Di "agrega a Norbi" o "elimina a Norbi", para eliminar o agregar al jugador de nombre Norbi.</p>'
+    speechText += '<p> El juego consiste de 3 tipos de preguntas: de opción múltiple, adivina la canción y temas por tiempo.</p>'
+    speechText += '<p> Opción múltiple: <break strength="strong"/> se te dirá una pregunta de opción múltiple y tendrás que contestar la respuesta correcta.</p>';
+    speechText += '<p> Adivina la canción: <break strength="strong"/> se reproducirá una canción y tendrás que contestar la respuesta correcta.</p>';
+    speechText += '<p> Tema por tiempo: <break strength="strong"/> se te dirá un tema y tendrás que decir una cantidad de palabras relacionadas que se te indique.</p>';
 
     return handlerInput.responseBuilder
       .speak(speechText)
