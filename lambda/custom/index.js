@@ -18,8 +18,7 @@ async function getRandomQuestion(handlerInput)
         speechText += data[0].text;
         speechText += " " + data[0].options;
         Object.assign(sessionAttributes, {
-        correctAnswer: data[0].correctAnswer,
-        jugadores: jugadores,
+        correctAnswer: data[0].correctAnswer
       });
         return speechText;
     }
@@ -175,7 +174,12 @@ const HandleGuessIntentHandler = {
     correctAnswer = sessionAttributes['correctAnswer'];
       if(guess.includes(correctAnswer.toLowerCase()))//Respuesta correcta
       {
-
+        var playerScores = sessionAttributes['score'];
+        var playerName = sessionAttributes['currentPlayer'];
+        playerScores[playerName] = playerScores[playerName] + 1;
+        Object.assign(sessionAttributes, {
+            score : playerScores
+        });
         speechText = `<speak>¿${guess}?, La respuesta es...<break time="1s"/><audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>¡Correcta!<audio src="soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_03"/></speak>`;
       }else{
         var seconds = Math.floor(Math.random()*15) + 2;
@@ -225,7 +229,7 @@ const AddPointIntentHandler = {
           Object.assign(sessionAttributes, {
               score : playerScores
           });
-          speechText = "Punto para " + playerName + " ahora lleva " + sessionAttributes['score'][playerName] + " puntos";
+          speechText = "Punto para " + playerName;
         }else{
           var response = responseBuilder
           .speak("No tengo registrado a ningún " + playerName)
@@ -258,12 +262,15 @@ const GetQuestionIntentHandler = {
     const {responseBuilder } = handlerInput;
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var playerName = await getRandomName(handlerInput, userID);
-    if(choice == 0)
+    if(choice == 0) //Pregunta de trivia
     {
       const { requestEnvelope, attributesManager } = handlerInput;
       const sessionAttributes = attributesManager.getSessionAttributes();
       var questionText = await getRandomQuestion(handlerInput);
       var speechText = playerName + ", " + questionText;
+      Object.assign(sessionAttributes, {
+      currentPlayer: playerName
+      });
       var response = responseBuilder
         .speak(speechText)
         .getResponse();
