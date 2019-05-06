@@ -54,7 +54,7 @@ async function getRandomName(handlerInput, userID)
    return dbHelper.getNames(userID)
       .then((data) => {
         if (data.length == 0) {
-          speechText = "Aún no has guardado ningún nombre"
+          speechText = "Aún no has guardado ningún nombre."
         } else {
           var nameArray = data.map(e => e.playerName).join(",").split(",");
           speechText = nameArray[Math.floor(Math.random()*nameArray.length)];
@@ -76,7 +76,7 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   async handle(handlerInput) {
-    const speechText = 'Hola, soy Vocatus, tu skill específica para las pedas y poner el ambiente, puedes empezar preguntándome ¿Cómo se juega?';
+    const speechText = '<p>Hola, soy Vocatus, tu skill para las pedas y poner el ambiente.</p> <p>Puedes empezar preguntándome ¿Cómo se juega?</p>';
     const repromptText = 'Dime un nombre';
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     console.log(typeof getAllNames(handlerInput, userID));
@@ -108,12 +108,12 @@ const StartTriviaIntentHandler = {
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var names = await getAllNames(handlerInput, userID);
     var speechText =""
-    if(names != null){
+    if(names != null or names != ""){
       speechText = "Prepárense " + names + " para un juego en el que se les harán varias\
-      preguntas y ustedes deberán contestar tan bien como puedan para evitar salir en coma etílico";
+      preguntas y ustedes deberán contestar tan bien como puedan para evitar salir en coma etílico.";
     }else{
       var speechText = "No tienes jugadores registrados. ";
-      speechText += "Dime a quiénenes agrego.";
+      speechText += '<p>Dime a quiénenes agrego.</p><p> Di: "Agrega a" y di el nombre del jugador que se unirá al juego.</p>';
     }
     var response = responseBuilder
       .speak(speechText)
@@ -163,9 +163,9 @@ const TellNameIntentHandler = {
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     return dbHelper.getNames(userID)
       .then((data) => {
-        var speechText = "Los nombres que has guardado son "
+        var speechText = "<p>Los nombres que has guardado son: </p> "
         if (data.length == 0) {
-          speechText = "Aún no has guardado ningún nombre"
+          speechText = "<p>Aún no has guardado ningún nombre</p>"
         } else {
           speechText += data.map(e => e.playerName).join(", ")
         }
@@ -210,7 +210,7 @@ const HandleGuessIntentHandler = {
         speechText = `<speak>¿${guess}?, La respuesta es...<break time="1s"/><audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>¡Correcta!<audio src="soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_03"/></speak>`;
       }else{
         var seconds = Math.floor(Math.random()*15) + 2;
-        var alcohols = ["cerveza","vodka","tequila","una cubita", "nesquick por la nariz", "tonayan", "besar al de al lado", "darle de tomar al de al lado", "fourloko", "kosaco", "aguas locas", "la bebida del de al lado", "el vaso más lleno", "alcohol con mayor grado","lamerle el pie al más chaparro", "quitarte la playera","gemir","yakult"];
+        var alcohols = ["cerveza", "sube a la más chaparra a la mesa","vodka","tequila","una cubita", "un whiskito", "nesquick por la nariz", "tonayan", "besar al de al lado", "darle de tomar al de al lado", "fourloko", "kosaco", "aguas locas", "la bebida del de al lado", "el vaso más lleno", "lamerle el pie a la más chaparra","gemir"];
         var drink = alcohols[Math.floor(Math.random()*alcohols.length)];
         speechText = `<speak>¿${guess}?, La respuesta es...<break time="1s"/><audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_negative_response_01'/>¡Incorrecta!<audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_boo_03'/>${seconds} segundos de ${drink}</speak>`;
       }
@@ -359,7 +359,7 @@ const GetQuestionIntentHandler = {
     }
     else{
       var themes = ["acuarios","pintura","canotaje","música clasica","dietas","mascotas", "tec de monterrey"];
-      var speechText = "<speak>" + playerName + ", tienes 5 segundos para decir 5 cosas relacionadas con el tema de " + themes[Math.floor(Math.random()*themes.length)] + " empezando ahora ";
+      var speechText = "<speak><p> " + playerName + ", tienes 5 segundos para decir 5 cosas relacionadas con el tema de " + themes[Math.floor(Math.random()*themes.length)] + " empezando ahora </p>";
       for(var x = 1; x <= 4; x++){
         speechText+="<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/><break time='1s'/>";
       }
