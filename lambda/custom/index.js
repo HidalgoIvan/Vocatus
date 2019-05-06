@@ -252,11 +252,56 @@ const AddPointIntentHandler = {
           });
           speechText = "Punto para " + playerName;
         }else{
-          var response = responseBuilder
-          .speak("No tengo registrado a ningún " + playerName)
+          speechText = "No tengo registrado a ningún " + playerName;
+        }
+        var response = responseBuilder
+          .speak(speechText)
           .getResponse();
-          response.shouldEndSession = false;
-          return response;
+        response.shouldEndSession = false;
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+        speechText = "Error al acceder a los nombres en la base de datos"
+        return responseBuilder
+          .speak(speechText)
+          .getResponse();
+      })
+    }
+}
+const RemovePointIntentHandler = {
+
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'RemovePoint';
+  },
+  async handle(handlerInput) {
+    const { responseBuilder } = handlerInput;
+    var speechText = "";
+    const { requestEnvelope, attributesManager } = handlerInput;
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
+    var allNames = "";
+    const request = handlerInput.requestEnvelope.request;
+    return dbHelper.getNames(userID)
+      .then((data) => {
+        if (data.length == 0) {
+          speechText = "Aún no has guardado a ningún jugador"
+        } else {
+          allNames = data.map(e => e.playerName).join(", ");
+        }
+        let playerName = request.intent.slots.player.value
+        if(allNames.toLowerCase().includes(playerName.toLowerCase()))
+        {
+          const { requestEnvelope, attributesManager } = handlerInput;
+          const sessionAttributes = attributesManager.getSessionAttributes();
+          var playerScores = sessionAttributes['score'];
+          playerScores[playerName] = playerScores[playerName] + 1;
+          Object.assign(sessionAttributes, {
+              score : playerScores
+          });
+          speechText = playerName + " menos un punto, carnal.";
+        }else{
+          speechText = "No tengo registrado a ningún " + playerName;
         }
         var response = responseBuilder
           .speak(speechText)
@@ -418,6 +463,7 @@ exports.handler = skillBuilder
     HandleGuessIntentHandler,
     RemoveNameIntentHandler,
     AddPointIntentHandler,
+    RemovePointHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
