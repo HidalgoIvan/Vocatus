@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-vocatus-default",
             "handler": "index.handler",
-            "revisionId": "098073f9-6be3-412b-8224-d9e205d53caf",
+            "revisionId": "ff0eca07-67a6-4a8d-83e7-642b58b2e553",
             "runtime": "nodejs8.10"
           }
         ]

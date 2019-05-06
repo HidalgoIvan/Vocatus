@@ -40,7 +40,6 @@ async function getRandomSongQuestion(handlerInput)
         speechText += " " + data[0].options;
         Object.assign(sessionAttributes, {
         correctAnswer: data[0].correctAnswer,
-        jugadores: jugadores,
       });
         return speechText;
     }
@@ -280,7 +279,7 @@ const GetQuestionIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GetQuestion';
   },
   async handle(handlerInput) {
-    var choice = 1;
+    var choice = Math.floor(Math.random() * 3);
     const {responseBuilder } = handlerInput;
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     var playerName = await getRandomName(handlerInput, userID);
