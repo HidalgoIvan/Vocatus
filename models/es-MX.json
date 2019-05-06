@@ -728,6 +728,292 @@
                                     "diez patas"
                                 ]
                             }
+                        },
+                        {
+                            "name": {
+                                "value": "sálvame",
+                                "synonyms": [
+                                    "salvame",
+                                    "la de sálvame","la de salvame"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "luz de día",
+                                "synonyms": [
+                                    "luz de día",
+                                    "Luz de día"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "suave",
+                                "synonyms": [
+                                    "Suave"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "enjoy the silence",
+                                "synonyms": [
+                                    "Enjoy the silence",
+                                    "enyoi de sailens"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ahora te puedes marchar",
+                                "synonyms": [
+                                    "Ahora te puedes marchar",
+                                    "si no supiste amar"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "la incondicional",
+                                "synonyms": [
+                                    "incondicional",
+                                    "La incondicional"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sol, arena y mar",
+                                "synonyms": [
+                                    "sol arena y mar",
+                                    "Sol, Arena y Mar"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "entre dos tierras",
+                                "synonyms": [
+                                    "entre 2 tierras",
+                                    "Entre dos tierras","Entre 2 tierras"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "la carta",
+                                "synonyms": [
+                                    "La carta",
+                                    "Carta","carta"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "take on me",
+                                "synonyms": [
+                                    "take on me",
+                                    "teik on mi", "taik onmi", " teik onmi", "take onme"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cuando calienta el sol",
+                                "synonyms": [
+                                    "Cuando calienta el sol",
+                                    "caundo calienta el sol"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "don't you want me",
+                                "synonyms": [
+                                    "Dont you want me",
+                                    "don't you want me", "dont you want me", "dont yu güan mi"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "fiesta pagana",
+                                "synonyms": [
+                                    "Fiesta pagana",
+                                    "la fiesta pagana"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "la chica de humo",
+                                "synonyms": [
+                                    "La chica de humo",
+                                    "chica de humo", "Chica de humo"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "living on a prayer",
+                                "synonyms": [
+                                    "Living on a prayer",
+                                    "living on a preyer"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "your love",
+                                "synonyms": [
+                                    "Your love",
+                                    "yur lof"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "human",
+                                "synonyms": [
+                                    "Human",
+                                    "giuman","jiuman"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tabaco y chanel",
+                                "synonyms": [
+                                    "Tabaco y channel",
+                                    "Tabaco y chanel","tabaco y channel"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "always",
+                                "synonyms": [
+                                    "Always",
+                                    "ALWAYS","olweis"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "like a stone",
+                                "synonyms": [
+                                    "like a stone",
+                                    "laik a estoun"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "she will be loved",
+                                "synonyms": [
+                                    "shi wil bi lof",
+                                    "She will be loved"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "billy jean",
+                                "synonyms": [
+                                    "billy jean",
+                                    "billy gin"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cuando te besé",
+                                "synonyms": [
+                                    "Cuando te besé", "cuando te bese"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ven bailalo",
+                                "synonyms": [
+                                    "Ven bailalo",
+                                    "ven bailao"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "my girl",
+                                "synonyms": [
+                                    "My girl",
+                                    "mai guerl"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "beautiful girl",
+                                "synonyms": [
+                                    "biutiful guerl",
+                                    "Beautiful girl"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "charlie brown",
+                                "synonyms": [
+                                    "Charly brown",
+                                    "Charlie brown"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "how deep is your love",
+                                "synonyms": [
+                                    "jau dip is yur lof",
+                                    "How deep is your love"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "maneater",
+                                "synonyms": [
+                                    "Maneater",
+                                    "man eater", "Man eater", "man iter", "man irer", "maniter"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mis ojos lloran por ti",
+                                "synonyms": [
+                                    "Mis ojos lloran por ti",
+                                    "mis ojos lloran"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pretty girl",
+                                "synonyms": [
+                                    "Pretty girl",
+                                    "priri girl", "priri guerl", " prettygirl"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Somebody that i used to know",
+                                "synonyms": [
+                                    "somebody that i used to know",
+                                    "Somebody that I used to know", "Somebody that I used to know", "Sombari dat ay yust tu nou", "sombari dat ay yust tu nou"
+                                ]
+                            }
                         }
                     ]
                 }
