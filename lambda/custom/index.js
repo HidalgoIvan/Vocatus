@@ -352,7 +352,7 @@ const GetQuestionIntentHandler = {
       return response;
     }
     else{
-      var themes = ["acuarios","pintura","canotaje","música clasica","dietas","mascotas"];
+      var themes = ["acuarios","pintura","canotaje","música clasica","dietas","mascotas", "tec de monterrey"];
       var speechText = "<speak>" + playerName + ", tienes 5 segundos para decir 5 cosas relacionadas con el tema de " + themes[Math.floor(Math.random()*themes.length)] + " empezando ahora ";
       for(var x = 1; x <= 4; x++){
         speechText+="<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/><break time='1s'/>";
@@ -402,7 +402,27 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'You can introduce yourself by telling me your name';
+    const speechText = 'Puedes decir: "siguiente pregunta", para pasar a la siguiente pregunta. "Agrega a Norbi", para agregar al jugador de nombre Norbi. "Eliminia a Norbi", para eliminar al jugador de nombre norbi. "Súmale un punto a" o "Réstale un punto a", para modificar el score de un jugador en específico.';
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .getResponse();
+  },
+};
+
+const InstruccionesIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'Instrucciones';
+  },
+  handle(handlerInput) {
+    var speechText = '<p>Di "empezar juego", para iniciar a jugar.</p><p>Di "siguiente pregunta", para pasar a la siguiente pregunta.</p>';
+    speechText += '<p>Di "agrega a Norbi" o "elimina a Norbi", para eliminar o agregar al jugador de nombre Norbi.</p>'
+    speechText += '<p>El juego consiste de 3 tipos de preguntas: de opción múltiple, adivina la canción y temas por tiempo.</p>'
+    speechText += '<p>Opcón múltiple: <break strength="strong"/> se te dirá una pregunta de opción múltiple y tendrás que contestar la respuesta correcta.</p>';
+    speechText += '<p>Adivina la canción: <break strength="strong"/> se reproducirá una cancióne y tendrás que contestar la respuesta correcta.</p>';
+    speechText += '<p>Tema por tiempo: <break strength="strong"/> se te dirá un tema y tendrás que decir la cantidad de palabras relacionadas que se te indique.</p>';
 
     return handlerInput.responseBuilder
       .speak(speechText)
