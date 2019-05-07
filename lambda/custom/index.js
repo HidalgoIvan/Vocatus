@@ -152,7 +152,26 @@ const SaveNameIntentHandler = {
       })
   },
 };
-
+const GetScoreIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'GetScore';
+  },
+  async handle(handlerInput) {
+    const { requestEnvelope, attributesManager, responseBuilder } = handlerInput;
+    const sessionAttributes = attributesManager.getSessionAttributes();
+    var scores = sessionAttributes['score']
+    const userID = handlerInput.requestEnvelope.context.System.user.userId;
+    var speechText = "";
+    for(var key in scores){
+      speechText += `<p> ${key} tiene un puntaje de ${scores[key]} puntos.</p>`
+    }
+    return responseBuilder
+      .speak(speechText)
+      .reprompt(GENERAL_REPROMPT)
+      .getResponse();
+  }
+}
 const TellNameIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -491,6 +510,7 @@ exports.handler = skillBuilder
     AddPointIntentHandler,
     RemovePointHandler,
     HelpIntentHandler,
+    GetScoreIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
   )
